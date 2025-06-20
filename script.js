@@ -45,7 +45,7 @@ function createFloor() {
 class grassFloor {
     constructor(dX, dY) {
         this.sX = tilesSize * 0
-        this.sY = tilesSize * 5
+        this.sY = tilesSize * 11
         this.dX = dX
         this.dY = dY
     }
