@@ -1,13 +1,13 @@
-
 let canvas = document.querySelector('#canvas');
 
 let context;
 
 const mapTiles = 100
-const rowTiles = 10
-const columnTiles = 10
-const tilesWidth = 80
-const tilesHeight = 80
+const rowTiles = 20
+const columnTiles = 20
+const tilesSize = 32
+const tilesWidth = 32
+const tilesHeight = 32
 
 canvas.height = tilesHeight * columnTiles;
 canvas.width = tilesWidth * rowTiles;
@@ -19,9 +19,6 @@ colonyImage.src = "./images/colony-db32.png"
 
 let floorTilesImage = new Image()
 floorTilesImage.src = "./images/terrain.png"
-
-const floorTilesImageSize = 1024
-const floorTilesImageTileSize = 32
 
 let floorArray = []
 
@@ -37,8 +34,6 @@ floorTilesImage.onload = () => {
 function update() {
     // context.fillStyle = 'black';
     // context.fillRect(0, 0, canvas.width, canvas.height);
-
-    
     for (let i = 0; i < floorArray.length; i++) {
         floorArray[i].draw();
       }
@@ -49,8 +44,14 @@ function update() {
 function createFloor() {
 
     for (let i = 0; i < columnTiles; i++) {
+        let randomNumber = Math.floor(Math.random() * 3) + 15
         for (let j = 0; j < rowTiles; j++) {
+            if (randomNumber < j) {
+            floorArray.push(new waterFloor(tilesWidth * j, tilesHeight * i))
+        } else {
             floorArray.push(new grassFloor(tilesWidth * j, tilesHeight * i))
+        }
+            console.log(randomNumber)
         }
     }   
 
@@ -60,10 +61,10 @@ function createFloor() {
 
 class grassFloor {
     constructor(dX, dY) {
-        this.sX = floorTilesImageTileSize * 0
-        this.sY = floorTilesImageTileSize * 11
-        this.sWidth = floorTilesImageTileSize 
-        this.sHeight = floorTilesImageTileSize
+        this.sX = tilesSize * 0
+        this.sY = tilesSize * 5
+        this.sWidth = tilesWidth
+        this.sHeight = tilesHeight
         this.dX = dX
         this.dY = dY
     
@@ -80,10 +81,10 @@ class grassFloor {
 
 class waterFloor {
     constructor(dX, dY) {
-        this.sX = 32 * 29
-        this.sY = 32 * 5
-        this.sWidth = floorTilesImageTileSize
-        this.sHeight = floorTilesImageTileSize
+        this.sX = tilesSize * 29
+        this.sY = tilesSize * 5
+        this.sWidth = tilesWidth
+        this.sHeight = tilesHeight
         this.dX = dX
         this.dY = dY
     
