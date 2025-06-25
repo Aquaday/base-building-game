@@ -18,6 +18,7 @@ let floorTilesImage = new Image()
 floorTilesImage.src = "./images/terrain.png"
 let floorArray = []
 
+
 floorTilesImage.onload = () => {
     createFloor()
     update()
